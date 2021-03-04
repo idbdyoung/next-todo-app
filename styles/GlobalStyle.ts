@@ -1,9 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 
 const GlobalStyle = createGlobalStyle`
-  body {
-    padding: 0;
-    margin: 0;
+  ${reset}
+  * {
+    box-sizing: border-box;
   }
 `;
 

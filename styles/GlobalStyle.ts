@@ -7,7 +7,10 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   body {
+    width: 100%;
     font-family: Noto Sans, Noto Sans KR;
+    display: flex;
+    justify-content: center;
   }
 `;
 

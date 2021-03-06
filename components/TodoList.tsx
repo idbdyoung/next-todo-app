@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 import { TodoType } from '../types/todo';
 import palette from '../styles/palette';
+import TrashCanIcon from '../public/static/svg/trash_can.svg';
+import CheckMarkIcon from '../public/static/svg/check_mark.svg';
 
 const Container = styled.div`
-  width: 100%;
-  height: 100px;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  border-right: 1px solid ${palette.gray};
+  border-left: 1px solid ${palette.gray};
   .todo-list {
     width: 100%;
     height: 100%;
@@ -37,9 +42,30 @@ const Container = styled.div`
         }
       }
       .todo-right-side {
-        width: 50px;
-        height: 100%;
-        background: ${palette.gray}
+        display: flex;
+        align-items: center;
+        margin-right: 12px;
+        svg {
+          &:first-child {
+            margin-right: 16px;
+          }
+        }
+        .todo-trash-can {
+          width: 16px;
+          height: 16px;
+        }
+        .todo-check-mark {
+          width: 16px;
+          height: 16px;
+        }
+        .todo-button {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          border: 1px solid ${palette.gray};
+          background-color: transparent;
+          outline: none;
+        }
       }
     }
   }
@@ -81,7 +107,29 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
                 </p>
               </div>
               <div className='todo-right-side'>
-
+                {
+                  todo.checked && (
+                    <>
+                      <TrashCanIcon
+                        className='todo-trash-can'
+                        onClick={() => {}}
+                      />
+                      <CheckMarkIcon
+                        className='todo-check-mark'
+                        onClick={() => {}}
+                      />
+                    </>
+                  )
+                }
+                {
+                  !todo.checked && (
+                    <button
+                      type='button'
+                      className='todo-button'
+                      onClick={() => {}}
+                    />
+                  )
+                }
               </div>
             </li>
           ))

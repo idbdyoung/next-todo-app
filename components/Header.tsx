@@ -3,8 +3,9 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;
-  height:52px;
+  justify-content: center;
+  width: 500px;
+  height: 53px;
   padding: 0 12px;
   border-bottom: 1px solid gray;
   h1 {

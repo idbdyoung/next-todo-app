@@ -10,6 +10,9 @@ const todos = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.send(todos);
     } catch (e) {
       console.log(e);
+      res.statusCode = 500;
+
+      return res.send(e);
     }
   }
   res.statusCode = 405;

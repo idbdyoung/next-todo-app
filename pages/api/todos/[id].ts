@@ -6,6 +6,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       const todoId = Number(req.query.id);
       const todo = Data.todo.exist({ id: todoId });
+
       if (!todo) {
         res.statusCode = 404;
         return res.end();
@@ -27,6 +28,21 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
       return res.send(e);
     }
+  }
+  if (req.method === 'DELETE') {
+    const todoId = Number(req.query.id);
+    const todo = Data.todo.exist({ id: todoId });
+
+    if (!todo) {
+      res.statusCode = 404;
+
+      return res.end();
+    }
+    const todos = Data.todo.getTodoList();
+    const changedTodos = todos.filter(todo => (todo.id !== todoId));
+    await Data.todo.write(changedTodos);
+    res.statusCode = 200;
+    return res.end();
   }
   res.statusCode = 405;
 

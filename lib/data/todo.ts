@@ -16,7 +16,7 @@ const exist = ({ id }: { id: number }) => {
   return todo;
 };
 const write = async (todos: TodoType[]) => {
-  writeFileSync('data/todos.json', JSON.stringify(todos));
+  await writeFileSync('data/todos.json', JSON.stringify(todos));
 };
 
 export default {

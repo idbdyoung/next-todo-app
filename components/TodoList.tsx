@@ -5,7 +5,11 @@ import palette from '../styles/palette';
 
 import TrashCanIcon from '../public/static/svg/trash_can.svg';
 import CheckMarkIcon from '../public/static/svg/check_mark.svg';
-import { writeTodosAPI } from '../lib/api/todo';
+import {
+  writeTodosAPI,
+  deleteTodosAPI
+} from '../lib/api/todo';
+import todo from '../lib/data/todo';
 
 const Container = styled.div`
   display: flex;
@@ -115,6 +119,11 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
     });
     setLocalTodos(newTodos);
   };
+  const deleteTodo = async (id: number) => {
+    await deleteTodosAPI(id);
+    const newTodos = localTodos.filter(todo => todo.id !== id);
+    setLocalTodos(newTodos);
+  };
 
   return (
     <Container>
@@ -134,7 +143,7 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
                     <>
                       <TrashCanIcon
                         className='todo-trash-can'
-                        onClick={() => {}}
+                        onClick={() => deleteTodo(todo.id)}
                       />
                       <CheckMarkIcon
                         className='todo-check-mark'

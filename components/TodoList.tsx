@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { TodoType } from '../types/todo';
 import palette from '../styles/palette';
+
 import TrashCanIcon from '../public/static/svg/trash_can.svg';
 import CheckMarkIcon from '../public/static/svg/check_mark.svg';
+import { writeTodosAPI } from '../lib/api/todo';
 
 const Container = styled.div`
   display: flex;
@@ -94,12 +97,31 @@ interface IProps {
 }
 
 const TodoList: React.FC<IProps> = ({ todos }) => {
+  const [localTodos, setLocalTodos] = useState(todos);
+
+  const checkTodo = async (checkedTodo: TodoType) => {
+    await writeTodosAPI(checkedTodo.id);
+
+    if (!checkedTodo.checked) {
+      alert('체크 되었습니다.');
+    } else {
+      alert('체크해제 되었습니다.')
+    }
+    const newTodos = localTodos.map(todo => {
+      if (todo.id === checkedTodo.id) {
+        return { ...todo, checked: !todo.checked };
+      }
+      return todo;
+    });
+    setLocalTodos(newTodos);
+  };
+
   return (
     <Container>
       <ul className='todo-list'>
         {
-          todos.map(todo => (
-            <li className='todo-item'>
+          localTodos.map(todo => (
+            <li className='todo-item' key={todo.id}>
               <div className='todo-left-side'>
                 <div className={`todo-color-block bg-${todo.color}`}/>
                 <p className={`todo-text ${todo.checked? 'checked-todo-text' : ''}`}>
@@ -116,7 +138,7 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
                       />
                       <CheckMarkIcon
                         className='todo-check-mark'
-                        onClick={() => {}}
+                        onClick={() => checkTodo(todo)}
                       />
                     </>
                   )
@@ -126,7 +148,7 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
                     <button
                       type='button'
                       className='todo-button'
-                      onClick={() => {}}
+                      onClick={() => checkTodo(todo)}
                     />
                   )
                 }

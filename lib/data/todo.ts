@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import { TodoType } from '../../types/todo';
 
 const getTodoList = () => {
@@ -10,7 +10,17 @@ const getTodoList = () => {
 
   return todos;
 };
+const exist = ({ id }: { id: number }) => {
+  const todos = getTodoList();
+  const todo = todos.some((todo) => todo.id === id);
+  return todo;
+};
+const write = async (todos: TodoType[]) => {
+  writeFileSync('data/todos.json', JSON.stringify(todos));
+};
 
 export default {
   getTodoList,
+  write,
+  exist,
 };

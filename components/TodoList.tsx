@@ -9,7 +9,6 @@ import {
   writeTodosAPI,
   deleteTodosAPI
 } from '../lib/api/todo';
-import todo from '../lib/data/todo';
 
 const Container = styled.div`
   display: flex;

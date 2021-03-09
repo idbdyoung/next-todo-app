@@ -1,17 +1,14 @@
 import { useRouter } from 'next/dist/client/router';
 import styled from 'styled-components';
-import palette from '../styles/palette';
 
 const Container = styled.footer`
-  width: 100%;
-  height: 53px;
-  position: fixed;
-  bottom: 0;
-  border-top: 1px solid ${palette.gray};
   display: flex;
-  justify-content: center;
   align-items: center;
-  background-color: white;
+  justify-content: center;
+  width: 500px;
+  height: 53px;
+  padding: 0 12px;
+  border-top: 1px solid gray;
   .footer-button {
     font-size: 32px;
     width: 32px;

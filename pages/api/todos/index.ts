@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Data from '../../../lib/data';
+import todo from '../../../lib/data/todo';
 
 const todos = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'GET') {
@@ -8,6 +9,26 @@ const todos = async (req: NextApiRequest, res: NextApiResponse) => {
       res.statusCode = 200;
 
       return res.send(todos);
+    } catch (e) {
+      console.log(e);
+      res.statusCode = 500;
+
+      return res.send(e);
+    }
+  }
+  if (req.method === 'POST') {
+    try {
+      const { text, color } = req.body;
+      const todos = await Data.todo.getTodoList();
+      const newTodo = {
+        id: todos.length,
+        checked: false,
+        text,
+        color,
+      }
+      await Data.todo.write([...todos, newTodo]);
+      res.statusCode = 200;
+      res.end();
     } catch (e) {
       console.log(e);
       res.statusCode = 500;

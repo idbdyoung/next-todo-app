@@ -102,16 +102,11 @@ interface IProps {
 const TodoList: React.FC<IProps> = ({ todos }) => {
   const [localTodos, setLocalTodos] = useState(todos);
 
-  const checkTodo = async (checkedTodo: TodoType) => {
-    await writeTodosAPI(checkedTodo.id);
+  const checkTodo = async (id: number) => {
+    await writeTodosAPI(id);
 
-    if (!checkedTodo.checked) {
-      alert('체크 되었습니다.');
-    } else {
-      alert('체크해제 되었습니다.')
-    }
     const newTodos = localTodos.map(todo => {
-      if (todo.id === checkedTodo.id) {
+      if (todo.id === id) {
         return { ...todo, checked: !todo.checked };
       }
       return todo;
@@ -146,7 +141,7 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
                       />
                       <CheckMarkIcon
                         className='todo-check-mark'
-                        onClick={() => checkTodo(todo)}
+                        onClick={() => checkTodo(todo.id)}
                       />
                     </>
                   )
@@ -156,7 +151,7 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
                     <button
                       type='button'
                       className='todo-button'
-                      onClick={() => checkTodo(todo)}
+                      onClick={() => checkTodo(todo.id)}
                     />
                   )
                 }

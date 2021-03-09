@@ -39,8 +39,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       return res.end();
     }
     const todos = Data.todo.getTodoList();
-    const changedTodos = todos.filter(todo => (todo.id !== todoId));
-    await Data.todo.write(changedTodos);
+    const filteredTodos = todos.filter(todo => (todo.id !== todoId));
+    await Data.todo.write(filteredTodos);
     res.statusCode = 200;
     return res.end();
   }

@@ -20,11 +20,11 @@ const todos = async (req: NextApiRequest, res: NextApiResponse) => {
       const { text, color } = req.body;
       const todos = await Data.todo.getTodoList();
       const newTodo = {
-        id: todos.length,
+        id: todos.length ? todos[todos.length - 1].id + 1 : 0,
         checked: false,
         text,
         color,
-      }
+      };
       await Data.todo.write([...todos, newTodo]);
       res.statusCode = 200;
       res.end();

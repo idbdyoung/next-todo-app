@@ -15,6 +15,7 @@ const index: NextPage<IProps> = ({ todos }) => {
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
     const { data } = await getTodosAPI();
+
     return { props: { todos: data } };
   } catch (e) {
     console.log(e);

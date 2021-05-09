@@ -104,7 +104,6 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
 
   const checkTodo = async (id: number) => {
     await writeTodosAPI(id);
-
     const newTodos = localTodos.map(todo => {
       if (todo.id === id) {
         return { ...todo, checked: !todo.checked };

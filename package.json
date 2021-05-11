@@ -4,14 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "next dev -p 1234",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "next": "^10.0.7",
-    "next-redux-wrapper": "^6.0.2",
+    "next": "^10.2.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "styled-components": "^5.2.1",
@@ -22,8 +21,6 @@
     "@types/react": "^17.0.2",
     "@types/styled-components": "^5.1.7",
     "babel-plugin-inline-react-svg": "^2.0.1",
-    "react-redux": "^7.2.3",
-    "redux": "^4.0.5",
     "typescript": "^4.2.2"
   }
 }

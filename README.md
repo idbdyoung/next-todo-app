@@ -33,7 +33,7 @@ npm run dev
 **Build**
 
 ```jsx
-npm run
+npm run build
 
 //next build
 ```

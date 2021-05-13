@@ -52,4 +52,3 @@ npm start
 - next
 - ES6
 - typescript
-- redux
